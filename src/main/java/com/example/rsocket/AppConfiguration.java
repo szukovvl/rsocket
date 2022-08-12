@@ -15,12 +15,12 @@ import java.util.Map;
 public class AppConfiguration {
 
     @Bean
-    public Sinks.Many<Event> eventPublisher() {
+    public Sinks.Many<CustomEvent<?>> eventPublisher() {
         return Sinks.many().replay().all();
     }
 
     @Bean
-    public Flux<Event> events(Sinks.Many<Event> eventPublisher) {
+    public Flux<CustomEvent<?>> events(Sinks.Many<CustomEvent<?>> eventPublisher) {
         return eventPublisher
                 .asFlux()
                 .replay(1)
@@ -28,9 +28,9 @@ public class AppConfiguration {
     }
 
     @Bean
-    public HandlerMapping webSocketMapping(Sinks.Many<Event> eventPublisher, Flux<Event> events) {
+    public HandlerMapping webSocketMapping(Sinks.Many<CustomEvent<?>> eventPublisher, Flux<CustomEvent<?>> events) {
         Map<String, Object> map = new HashMap<>();
-        map.put("/websocket/chat", new InfoSocketHandler(eventPublisher, events));
+        map.put("/websocket/chat", new WSCommonInfoHandler(eventPublisher, events));
         SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
         simpleUrlHandlerMapping.setUrlMap(map);
 
