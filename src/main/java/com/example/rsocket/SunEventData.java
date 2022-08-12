@@ -1,14 +1,5 @@
 package com.example.rsocket;
 
-public class SunEventData {
+public record SunEventData(float value) {
 
-    private final float value;
-
-    public SunEventData(float value) {
-        this.value = value;
-    }
-
-    public float getValue() {
-        return value;
-    }
 }

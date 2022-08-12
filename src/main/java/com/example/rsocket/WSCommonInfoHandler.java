@@ -12,8 +12,6 @@ import reactor.core.publisher.*;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
-import static com.example.rsocket.EventTypes.STAND;
-
 public class WSCommonInfoHandler implements WebSocketHandler {
 
     private final Logger logger = LoggerFactory.getLogger(WSCommonInfoHandler.class);
@@ -33,6 +31,7 @@ public class WSCommonInfoHandler implements WebSocketHandler {
                 while (true) {
                     Thread.sleep(3000);
                     eventPublisher.tryEmitNext(createEvent(types[random.nextInt(types.length)]));
+                    eventPublisher.tryEmitNext(createEvent(types[random.nextInt(types.length)]));
                 }
             }
             catch (InterruptedException ex) {
@@ -44,7 +43,10 @@ public class WSCommonInfoHandler implements WebSocketHandler {
     private CustomEvent<?> createEvent(EventTypes event) {
         switch (event) {
             case STAND -> {
-                return CustomEvent.type(event).data(new StandEventData(true, null)).build();
+                return CustomEvent
+                        .type(event)
+                        .data(new StandEventData(true, null))
+                        .build();
             }
             case SUN -> {
                 return CustomEvent.type(event).data(new SunEventData(new Random().nextFloat(100.0f))).build();

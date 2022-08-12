@@ -16,7 +16,7 @@ public class CustomEvent<T> implements ICustomEvent<T> {
 
     public CustomEvent(EventTypes type, T data) {
         this.type = type;
-        this.id = ID_GENERATOR.addAndGet(1);;
+        this.id = ID_GENERATOR.addAndGet(1);
         this.data = data;
         this.timestamp = System.currentTimeMillis();
     }

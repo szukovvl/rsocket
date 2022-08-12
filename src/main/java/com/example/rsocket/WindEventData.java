@@ -2,28 +2,11 @@ package com.example.rsocket;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class WindEventData {
+public record WindEventData(float value, String url, String errMsg) {
 
-    private final float value;
-    private final String url;
-    private final String errMsg;
-
-    public WindEventData(float value, String url, String errMsg) {
-        this.value = value;
-        this.url = url;
-        this.errMsg = errMsg;
-    }
-
-    public float getValue() {
-        return value;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
+    @Override
     @JsonInclude(JsonInclude.Include.NON_ABSENT)
-    public String getErrMsg() {
+    public String errMsg() {
         return errMsg;
     }
 }

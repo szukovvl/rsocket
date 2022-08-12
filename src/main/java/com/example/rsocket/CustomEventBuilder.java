@@ -6,17 +6,17 @@ public class CustomEventBuilder<T> {
 
     private T data;
 
-    public CustomEventBuilder type(EventTypes type) {
+    public CustomEventBuilder<T> type(EventTypes type) {
         this.type = type;
         return this;
     }
 
-    public CustomEventBuilder data(T data) {
+    public CustomEventBuilder<T> data(T data) {
         this.data = data;
         return this;
     }
 
-    public CustomEvent build() {
-        return new CustomEvent<T>(type, data);
+    public CustomEvent<T> build() {
+        return new CustomEvent<>(type, data);
     }
 }

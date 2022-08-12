@@ -16,7 +16,11 @@ public class AppConfiguration {
 
     @Bean
     public Sinks.Many<CustomEvent<?>> eventPublisher() {
-        return Sinks.many().replay().all();
+
+        return Sinks
+                .many()
+                .replay()
+                .latest();
     }
 
     @Bean
